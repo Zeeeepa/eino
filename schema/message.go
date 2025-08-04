@@ -317,12 +317,19 @@ type Message struct {
 
 // TokenUsage Represents the token usage of chat model request.
 type TokenUsage struct {
-	// PromptTokens is the number of tokens in the prompt.
+	// PromptTokens is the number of prompt tokens, including all the input tokens of this request.
 	PromptTokens int `json:"prompt_tokens"`
-	// CompletionTokens is the number of tokens in the completion.
+	// PromptTokenDetails is a breakdown of the prompt tokens.
+	PromptTokenDetails PromptTokenDetails `json:"prompt_token_details"`
+	// CompletionTokens is the number of completion tokens.
 	CompletionTokens int `json:"completion_tokens"`
-	// TotalTokens is the total number of tokens in the request.
+	// TotalTokens is the total number of tokens.
 	TotalTokens int `json:"total_tokens"`
+}
+
+type PromptTokenDetails struct {
+	// Cached tokens present in the prompt.
+	CachedTokens int `json:"cached_tokens"`
 }
 
 var _ MessagesTemplate = &Message{}
